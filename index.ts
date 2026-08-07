@@ -5,21 +5,35 @@
 Level 1 – Variables & Types
 ========================================
 
-1. fullName, age, isStudent নামে তিনটি ভেরিয়েবল তৈরি করো এবং সঠিক টাইপ দাও।
+Questions:
 
-2. favoriteFoods নামে একটি string[] অ্যারে তৈরি করো।
+1. fullName, age, isStudent নামে তিনটি variable তৈরি করো
+   এবং সঠিক TypeScript type দাও।
 
-3. scores নামে number[] অ্যারে তৈরি করে সব স্কোরের যোগফল বের করো।
+2. favoriteFoods নামে একটি string[] array তৈরি করো।
+
+3. scores নামে একটি number[] array তৈরি করো
+   এবং সব score-এর যোগফল বের করো।
+
+Answers:
 */
 
 const fullName: string = "Rayhan";
 const age: number = 24;
 const isStudent: boolean = true;
 
-const favoriteFoods: string[] = ["Pizza", "Burger", "Chicken"];
+const favoriteFoods: string[] = [
+  "Pizza",
+  "Burger",
+  "Chicken",
+];
 
 const scores: number[] = [80, 90, 100];
-const totalScore = scores.reduce((sum, score) => sum + score, 0);
+
+const totalScore: number = scores.reduce(
+  (sum, score) => sum + score,
+  0
+);
 
 console.log(totalScore);
 
@@ -28,12 +42,16 @@ console.log(totalScore);
 Level 2 – Functions
 ========================================
 
-1. add(a, b) ফাংশন লিখো যা দুইটি সংখ্যা যোগ করবে।
+Questions:
 
-2. isEven(num) ফাংশন লিখো যা boolean রিটার্ন করবে।
+1. add(a, b) function লিখো যা দুইটি number যোগ করবে।
 
-3. greet(name) ফাংশন লিখো।
-   যদি name না দেওয়া হয় তাহলে "Hello Guest" রিটার্ন করবে।
+2. isEven(num) function লিখো যা boolean return করবে।
+
+3. greet(name) function লিখো।
+   name না দিলে "Hello Guest" return করবে।
+
+Answers:
 */
 
 function add(a: number, b: number): number {
@@ -58,18 +76,20 @@ console.log(greet("Rayhan"));
 Level 3 – Objects & Type Alias
 ========================================
 
-1. নিচের মতো একটি টাইপ তৈরি করো:
+Questions:
 
-type User = {
-  id: number;
-  name: string;
-  email: string;
-};
+1. নিচের মতো একটি User type তৈরি করো:
 
-2. একটি user অবজেক্ট তৈরি করো।
+   id: number
+   name: string
+   email: string
 
-3. printUser(user: User) নামে ফাংশন লিখো
-   যা কনসোলে ইউজারের তথ্য দেখাবে।
+2. একটি user object তৈরি করো।
+
+3. printUser(user: User) function লিখো
+   যা user-এর information console-এ দেখাবে।
+
+Answers:
 */
 
 type User = {
@@ -95,12 +115,16 @@ printUser(user);
 Level 4 – Arrays of Objects
 ========================================
 
-1. User[] টাইপের একটি অ্যারে তৈরি করো।
+Questions:
 
-2. কমপক্ষে ৩ জন ইউজার যোগ করো।
+1. User[] type-এর একটি array তৈরি করো।
 
-3. এমন একটি ফাংশন লিখো যা User[]
-   থেকে নির্দিষ্ট id-এর ইউজার খুঁজে বের করবে।
+2. কমপক্ষে ৩ জন user যোগ করো।
+
+3. এমন একটি function লিখো যা User[]
+   থেকে নির্দিষ্ট id-এর user খুঁজে বের করবে।
+
+Answers:
 */
 
 const users: User[] = [
@@ -121,7 +145,10 @@ const users: User[] = [
   },
 ];
 
-function getUserById(list: User[], id: number): User | undefined {
+function getUserById(
+  list: User[],
+  id: number
+): User | undefined {
   return list.find((user) => user.id === id);
 }
 
@@ -132,23 +159,26 @@ console.log(getUserById(users, 2));
 Level 5 – Optional & Union Types
 ========================================
 
-1. নিচের টাইপটি তৈরি করো:
+Questions:
 
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  discount?: number;
-};
+1. নিচের Product type তৈরি করো:
 
-2. দুইটি প্রোডাক্ট তৈরি করো,
-   একটি discount সহ এবং একটি ছাড়া।
+   id: number
+   name: string
+   price: number
+   discount?: number
 
-3. এমন একটি ফাংশন লিখো যার প্যারামিটার হবে:
+2. দুইটি product তৈরি করো।
+   একটি discount সহ এবং একটি discount ছাড়া।
+
+3. এমন একটি function লিখো যার parameter হবে:
+
    string | number
 
-   যদি string হয় তাহলে তার length দেখাবে,
-   আর number হলে তার square দেখাবে।
+   string হলে তার length return করবে।
+   number হলে তার square return করবে।
+
+Answers:
 */
 
 type Product = {
@@ -187,12 +217,17 @@ console.log(checkValue(10));
 Level 6 – Interface
 ========================================
 
-1. interface Car তৈরি করো যেখানে থাকবে:
-   - brand
-   - model
-   - year
+Questions:
 
-2. একটি car অবজেক্ট তৈরি করো।
+1. Car নামে একটি interface তৈরি করো যেখানে থাকবে:
+
+   brand: string
+   model: string
+   year: number
+
+2. একটি car object তৈরি করো।
+
+Answers:
 */
 
 interface Car {
@@ -214,17 +249,20 @@ console.log(car);
 Level 7 – Generics
 ========================================
 
-1. Generic ফাংশন লিখো:
+Questions:
 
-identity(value)
+1. identity(value) নামে একটি generic function লিখো।
 
-যা যেটা পাবে সেটাই রিটার্ন করবে।
+2. function-টি যেই value পাবে,
+   সেটাই একই type-এ return করবে।
 
-উদাহরণ:
+Test:
 
 identity(10);
 identity("Hello");
 identity(true);
+
+Answers:
 */
 
 function identity<T>(value: T): T {
@@ -237,26 +275,28 @@ console.log(identity(true));
 
 /*
 ========================================
-Level 8 – Challenge
+Level 8 – Basic Task Manager
 ========================================
+
+Questions:
 
 একটি Task Manager বানাও।
 
 প্রতিটি Task হবে:
 
-type Task = {
-  id: number;
-  title: string;
-  completed: boolean;
-};
+id: number
+title: string
+completed: boolean
 
-নিচের ফাংশনগুলো লিখো:
+নিচের functionগুলো লিখো:
 
-addTask()
-deleteTask()
-toggleTask()
-getTaskById()
-showAllTasks()
+1. addTask()
+2. deleteTask()
+3. toggleTask()
+4. getTaskById()
+5. showAllTasks()
+
+Answers:
 */
 
 type Task = {
@@ -278,7 +318,9 @@ function addTask(title: string): void {
 }
 
 function deleteTask(id: number): void {
-  const index = tasks.findIndex((task) => task.id === id);
+  const index = tasks.findIndex(
+    (task) => task.id === id
+  );
 
   if (index !== -1) {
     tasks.splice(index, 1);
@@ -286,15 +328,21 @@ function deleteTask(id: number): void {
 }
 
 function toggleTask(id: number): void {
-  const task = tasks.find((task) => task.id === id);
+  const task = tasks.find(
+    (task) => task.id === id
+  );
 
   if (task) {
     task.completed = !task.completed;
   }
 }
 
-function getTaskById(id: number): Task | undefined {
-  return tasks.find((task) => task.id === id);
+function getTaskById(
+  id: number
+): Task | undefined {
+  return tasks.find(
+    (task) => task.id === id
+  );
 }
 
 function showAllTasks(): void {
@@ -314,3 +362,886 @@ console.log(getTaskById(2));
 deleteTask(1);
 
 showAllTasks();
+
+/*
+========================================
+Level 9 – Tuple
+========================================
+
+Questions:
+
+1. PersonInfo নামে একটি tuple type তৈরি করো যেখানে:
+
+   - প্রথম value হবে string
+   - দ্বিতীয় value হবে number
+   - তৃতীয় value হবে boolean
+
+2. একটি person tuple তৈরি করো।
+
+Answers:
+*/
+
+type PersonInfo = [string, number, boolean];
+
+const person: PersonInfo = [
+  "Rayhan",
+  24,
+  true,
+];
+
+console.log(person);
+
+/*
+========================================
+Level 10 – Readonly
+========================================
+
+Questions:
+
+1. UserInfo নামে একটি type তৈরি করো।
+
+2. এতে থাকবে:
+
+   readonly id: number
+   name: string
+   email: string
+
+3. একটি object তৈরি করো।
+
+4. name পরিবর্তন করো।
+
+5. id পরিবর্তন করার চেষ্টা করো।
+
+Answers:
+*/
+
+type UserInfo = {
+  readonly id: number;
+  name: string;
+  email: string;
+};
+
+const userInfo: UserInfo = {
+  id: 1,
+  name: "Rayhan",
+  email: "rayhan@mail.com",
+};
+
+userInfo.name = "Rahim";
+
+// userInfo.id = 2;
+// ❌ Error
+
+console.log(userInfo);
+
+/*
+========================================
+Level 11 – Literal Types
+========================================
+
+Questions:
+
+1. OrderStatus নামে একটি type তৈরি করো।
+
+এর value শুধুমাত্র হতে পারবে:
+
+   "pending"
+   "shipped"
+   "delivered"
+
+2. Order নামে একটি type তৈরি করো।
+
+3. একটি order object তৈরি করো।
+
+4. order-এর status পরিবর্তন করে "shipped" করো।
+
+Answers:
+*/
+
+type OrderStatus =
+  | "pending"
+  | "shipped"
+  | "delivered";
+
+type Order = {
+  id: number;
+  product: string;
+  status: OrderStatus;
+};
+
+const order: Order = {
+  id: 1,
+  product: "Laptop",
+  status: "pending",
+};
+
+order.status = "shipped";
+
+// order.status = "cancelled";
+// ❌ Error
+
+console.log(order);
+
+/*
+========================================
+Level 12 – Function Type
+========================================
+
+Questions:
+
+1. MathFunction নামে একটি function type তৈরি করো।
+
+2. Function-এ দুইটি number parameter থাকবে।
+
+3. Function number return করবে।
+
+4. এই type ব্যবহার করে:
+
+   addNumbers()
+   multiplyNumbers()
+
+   function তৈরি করো।
+
+Answers:
+*/
+
+type MathFunction = (
+  a: number,
+  b: number
+) => number;
+
+const addNumbers: MathFunction = (
+  a,
+  b
+) => {
+  return a + b;
+};
+
+const multiplyNumbers: MathFunction = (
+  a,
+  b
+) => {
+  return a * b;
+};
+
+console.log(addNumbers(10, 20));
+console.log(multiplyNumbers(10, 20));
+
+/*
+========================================
+Level 13 – Type Narrowing
+========================================
+
+Questions:
+
+1. processValue() function তৈরি করো।
+
+2. parameter হবে:
+
+   string | number | boolean
+
+3. string হলে uppercase করবে।
+
+4. number হলে 2 দিয়ে multiply করবে।
+
+5. boolean হলে Yes অথবা No দেখাবে।
+
+Answers:
+*/
+
+function processValue(
+  value: string | number | boolean
+): void {
+  if (typeof value === "string") {
+    console.log(value.toUpperCase());
+  } else if (typeof value === "number") {
+    console.log(value * 2);
+  } else {
+    console.log(value ? "Yes" : "No");
+  }
+}
+
+processValue("hello");
+processValue(10);
+processValue(true);
+
+/*
+========================================
+Level 14 – Intersection Type
+========================================
+
+Questions:
+
+1. Person type তৈরি করো:
+
+   name
+   age
+
+2. Employee type তৈরি করো:
+
+   employeeId
+   department
+
+3. & operator ব্যবহার করে
+   EmployeePerson type তৈরি করো।
+
+4. একটি employee object তৈরি করো।
+
+Answers:
+*/
+
+type Person = {
+  name: string;
+  age: number;
+};
+
+type Employee = {
+  employeeId: number;
+  department: string;
+};
+
+type EmployeePerson = Person & Employee;
+
+const employee: EmployeePerson = {
+  name: "Rayhan",
+  age: 24,
+  employeeId: 101,
+  department: "IT",
+};
+
+console.log(employee);
+
+/*
+========================================
+Level 15 – keyof
+========================================
+
+Questions:
+
+Student type:
+
+   name: string
+   age: number
+   grade: string
+
+একটি function তৈরি করো:
+
+getStudentProperty()
+
+যেখানে property হিসেবে শুধুমাত্র
+Student-এর valid key গ্রহণ করা যাবে।
+
+Answers:
+*/
+
+type Student = {
+  name: string;
+  age: number;
+  grade: string;
+};
+
+const student: Student = {
+  name: "Rayhan",
+  age: 24,
+  grade: "A",
+};
+
+function getStudentProperty(
+  student: Student,
+  property: keyof Student
+): string | number {
+  return student[property];
+}
+
+console.log(
+  getStudentProperty(student, "name")
+);
+
+console.log(
+  getStudentProperty(student, "age")
+);
+
+console.log(
+  getStudentProperty(student, "grade")
+);
+
+// getStudentProperty(student, "salary");
+// ❌ Error
+
+/*
+========================================
+Level 16 – Generic Array Function
+========================================
+
+Questions:
+
+1. getFirst() নামে generic function তৈরি করো।
+
+2. এটি যেকোনো array গ্রহণ করবে।
+
+3. array-এর প্রথম element return করবে।
+
+4. Empty array হলে undefined return করবে।
+
+Test:
+
+getFirst([10, 20, 30])
+getFirst(["A", "B", "C"])
+getFirst([true, false])
+
+Answers:
+*/
+
+function getFirst<T>(
+  items: T[]
+): T | undefined {
+  return items[0];
+}
+
+console.log(getFirst([10, 20, 30]));
+console.log(getFirst(["A", "B", "C"]));
+console.log(getFirst([true, false]));
+
+/*
+========================================
+Level 17 – Generic Object Function
+========================================
+
+Questions:
+
+1. একটি generic getProperty() function তৈরি করো।
+
+2. এটি object এবং object-এর key গ্রহণ করবে।
+
+3. key-এর value return করবে।
+
+Answers:
+*/
+
+function getProperty<
+  T,
+  K extends keyof T
+>(
+  object: T,
+  key: K
+): T[K] {
+  return object[key];
+}
+
+const personData = {
+  name: "Rayhan",
+  age: 24,
+  email: "rayhan@mail.com",
+};
+
+console.log(
+  getProperty(personData, "name")
+);
+
+console.log(
+  getProperty(personData, "age")
+);
+
+console.log(
+  getProperty(personData, "email")
+);
+
+// getProperty(personData, "salary");
+// ❌ Error
+
+/*
+========================================
+Level 18 – Optional Property
+========================================
+
+Questions:
+
+Profile type তৈরি করো:
+
+   name: string
+   age: number
+   phone?: string
+   address?: string
+
+তারপর:
+
+1. phone/address ছাড়া একটি profile তৈরি করো।
+
+2. phone/address সহ আরেকটি profile তৈরি করো।
+
+Answers:
+*/
+
+type Profile = {
+  name: string;
+  age: number;
+  phone?: string;
+  address?: string;
+};
+
+const profile1: Profile = {
+  name: "Rayhan",
+  age: 24,
+};
+
+const profile2: Profile = {
+  name: "Rahim",
+  age: 25,
+  phone: "01700000000",
+  address: "Dhaka",
+};
+
+console.log(profile1);
+console.log(profile2);
+
+/*
+========================================
+Level 19 – Enum
+========================================
+
+Questions:
+
+1. Role নামে একটি enum তৈরি করো:
+
+   Admin
+   User
+   Moderator
+
+2. Account type তৈরি করো:
+
+   name
+   role
+
+3. একটি account object তৈরি করো।
+
+4. যদি role Admin হয়,
+   "User is an admin" দেখাও।
+
+Answers:
+*/
+
+enum Role {
+  Admin = "admin",
+  User = "user",
+  Moderator = "moderator",
+}
+
+type Account = {
+  name: string;
+  role: Role;
+};
+
+const account: Account = {
+  name: "Rayhan",
+  role: Role.Admin,
+};
+
+console.log(account);
+
+if (account.role === Role.Admin) {
+  console.log("User is an admin");
+}
+
+/*
+========================================
+Level 20 – Discriminated Union
+========================================
+
+Questions:
+
+একটি API response type তৈরি করো।
+
+Response তিন ধরনের হতে পারবে:
+
+1. success
+   status: "success"
+   data: string[]
+
+2. error
+   status: "error"
+   message: string
+
+3. loading
+   status: "loading"
+
+তারপর handleResponse() function তৈরি করো।
+
+Answers:
+*/
+
+type ApiResponse =
+  | {
+      status: "success";
+      data: string[];
+    }
+  | {
+      status: "error";
+      message: string;
+    }
+  | {
+      status: "loading";
+    };
+
+function handleResponse(
+  response: ApiResponse
+): void {
+  if (response.status === "success") {
+    console.log("Data:", response.data);
+  } else if (response.status === "error") {
+    console.log(
+      "Error:",
+      response.message
+    );
+  } else {
+    console.log("Loading...");
+  }
+}
+
+handleResponse({
+  status: "success",
+  data: ["Apple", "Banana"],
+});
+
+handleResponse({
+  status: "error",
+  message: "Something went wrong",
+});
+
+handleResponse({
+  status: "loading",
+});
+
+/*
+========================================
+Level 21 – Partial
+========================================
+
+Questions:
+
+1. UserData type তৈরি করো:
+
+   id
+   name
+   email
+
+2. Partial<UserData> ব্যবহার করে
+   এমন একটি object তৈরি করো যেখানে
+   শুধু name থাকবে।
+
+Answers:
+*/
+
+type UserData = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+const updateUser: Partial<UserData> = {
+  name: "Rayhan",
+};
+
+console.log(updateUser);
+
+/*
+========================================
+Level 22 – Pick
+========================================
+
+Questions:
+
+UserData থেকে শুধুমাত্র:
+
+   name
+   email
+
+নিয়ে UserPreview type তৈরি করো।
+
+Answers:
+*/
+
+type UserPreview = Pick<
+  UserData,
+  "name" | "email"
+>;
+
+const preview: UserPreview = {
+  name: "Rayhan",
+  email: "rayhan@mail.com",
+};
+
+console.log(preview);
+
+/*
+========================================
+Level 23 – Omit
+========================================
+
+Questions:
+
+UserData থেকে id বাদ দিয়ে
+UserWithoutId type তৈরি করো।
+
+Answers:
+*/
+
+type UserWithoutId = Omit<
+  UserData,
+  "id"
+>;
+
+const newUser: UserWithoutId = {
+  name: "Rayhan",
+  email: "rayhan@mail.com",
+};
+
+console.log(newUser);
+
+/*
+========================================
+Level 24 – Record
+========================================
+
+Questions:
+
+Record ব্যবহার করে এমন একটি type তৈরি করো
+যেখানে:
+
+   admin: number
+   user: number
+   moderator: number
+
+তারপর একটি object তৈরি করো।
+
+Answers:
+*/
+
+type UserCount = Record<
+  "admin" | "user" | "moderator",
+  number
+>;
+
+const usersCount: UserCount = {
+  admin: 5,
+  user: 100,
+  moderator: 10,
+};
+
+console.log(usersCount);
+
+/*
+========================================
+Level 25 – Real-world API Data
+========================================
+
+Questions:
+
+একটি API Product type তৈরি করো:
+
+   id: number
+   title: string
+   price: number
+   category: string
+   inStock: boolean
+
+তারপর:
+
+1. কমপক্ষে ৩টি product তৈরি করো।
+
+2. filter() ব্যবহার করে
+   শুধুমাত্র inStock products বের করো।
+
+Answers:
+*/
+
+type ApiProduct = {
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+  inStock: boolean;
+};
+
+const products: ApiProduct[] = [
+  {
+    id: 1,
+    title: "Laptop",
+    price: 80000,
+    category: "Electronics",
+    inStock: true,
+  },
+  {
+    id: 2,
+    title: "Phone",
+    price: 30000,
+    category: "Electronics",
+    inStock: false,
+  },
+  {
+    id: 3,
+    title: "Keyboard",
+    price: 3000,
+    category: "Accessories",
+    inStock: true,
+  },
+];
+
+const availableProducts: ApiProduct[] =
+  products.filter(
+    (product) => product.inStock
+  );
+
+console.log(availableProducts);
+
+/*
+========================================
+Level 26 – Advanced Task Manager
+========================================
+
+Questions:
+
+Task-এর সাথে priority যোগ করো।
+
+Priority হতে পারবে:
+
+   "low"
+   "medium"
+   "high"
+
+Task হবে:
+
+   id: number
+   title: string
+   completed: boolean
+   priority: Priority
+
+নিচের functionগুলো লিখো:
+
+1. createTask()
+2. removeTask()
+3. changeTaskStatus()
+4. findTaskById()
+5. getTasksByPriority()
+6. showCompletedTasks()
+7. showAllTaskItems()
+
+Answers:
+*/
+
+type Priority =
+  | "low"
+  | "medium"
+  | "high";
+
+type TaskItem = {
+  id: number;
+  title: string;
+  completed: boolean;
+  priority: Priority;
+};
+
+const taskList: TaskItem[] = [];
+
+let taskId = 1;
+
+function createTask(
+  title: string,
+  priority: Priority
+): void {
+  taskList.push({
+    id: taskId++,
+    title,
+    completed: false,
+    priority,
+  });
+}
+
+function removeTask(id: number): void {
+  const index = taskList.findIndex(
+    (task) => task.id === id
+  );
+
+  if (index !== -1) {
+    taskList.splice(index, 1);
+  }
+}
+
+function changeTaskStatus(id: number): void {
+  const task = taskList.find(
+    (task) => task.id === id
+  );
+
+  if (task) {
+    task.completed = !task.completed;
+  }
+}
+
+function findTaskById(
+  id: number
+): TaskItem | undefined {
+  return taskList.find(
+    (task) => task.id === id
+  );
+}
+
+function getTasksByPriority(
+  priority: Priority
+): TaskItem[] {
+  return taskList.filter(
+    (task) => task.priority === priority
+  );
+}
+
+function showCompletedTasks(): TaskItem[] {
+  return taskList.filter(
+    (task) => task.completed
+  );
+}
+
+function showAllTaskItems(): void {
+  console.log("All Tasks:", taskList);
+}
+
+// Demo
+
+createTask(
+  "Learn TypeScript",
+  "high"
+);
+
+createTask(
+  "Practice Generics",
+  "medium"
+);
+
+createTask(
+  "Build Project",
+  "high"
+);
+
+createTask(
+  "Read Documentation",
+  "low"
+);
+
+changeTaskStatus(1);
+changeTaskStatus(3);
+
+console.log(
+  "Task by ID:",
+  findTaskById(3)
+);
+
+console.log(
+  "High Priority:",
+  getTasksByPriority("high")
+);
+
+console.log(
+  "Completed:",
+  showCompletedTasks()
+);
+
+removeTask(2);
+
+showAllTaskItems();
