@@ -1245,3 +1245,418 @@ console.log(
 removeTask(2);
 
 showAllTaskItems();
+
+
+/*
+========================================
+Level 27 – ReturnType
+========================================
+
+Questions:
+
+1. getUser() নামে একটি function তৈরি করো।
+
+2. Function-টি নিচের object return করবে:
+
+   id: number
+   name: string
+   email: string
+
+3. ReturnType<typeof getUser> ব্যবহার করে
+   UserResult নামে একটি type তৈরি করো।
+
+4. UserResult type ব্যবহার করে
+   একটি user object তৈরি করো।
+
+Answers:
+*/
+
+function getUser() {
+  return {
+    id: 1,
+    name: "Rayhan",
+    email: "rayhan@mail.com",
+  };
+}
+
+type UserResult = ReturnType<typeof getUser>;
+
+const userResult: UserResult = {
+  id: 1,
+  name: "Rayhan",
+  email: "rayhan@mail.com",
+};
+
+console.log(userResult);
+
+/*
+========================================
+Level 28 – Parameters
+========================================
+
+Questions:
+
+1. createProduct() নামে একটি function তৈরি করো।
+
+2. Function-এর parameter হবে:
+
+   name: string
+   price: number
+   inStock: boolean
+
+3. Parameters<typeof createProduct>
+   ব্যবহার করে ProductParams type তৈরি করো।
+
+4. ProductParams type ব্যবহার করে
+   একটি array তৈরি করো।
+
+5. Array-এর values ব্যবহার করে
+   createProduct() function call করো।
+
+Answers:
+*/
+
+function createProduct(
+  name: string,
+  price: number,
+  inStock: boolean
+) {
+  return {
+    name,
+    price,
+    inStock,
+  };
+}
+
+type ProductParams = Parameters<
+  typeof createProduct
+>;
+
+const productParams: ProductParams = [
+  "Laptop",
+  80000,
+  true,
+];
+
+console.log(
+  createProduct(...productParams)
+);
+
+/*
+========================================
+Level 29 – Generic API Response
+========================================
+
+Questions:
+
+1. একটি generic ApiResponse<T> type তৈরি করো।
+
+2. এতে থাকবে:
+
+   success: boolean
+   data: T
+   message: string
+
+3. ApiResponse<string[]> ব্যবহার করে
+   একটি response তৈরি করো।
+
+4. ApiResponse<User> ব্যবহার করে
+   আরেকটি response তৈরি করো।
+
+5. দুইটি response-এর data
+   console-এ দেখাও।
+
+Answers:
+*/
+
+type ApiResponse<T> = {
+  success: boolean;
+  data: T;
+  message: string;
+};
+
+const productResponse: ApiResponse<string[]> = {
+  success: true,
+  data: ["Laptop", "Phone", "Keyboard"],
+  message: "Products fetched successfully",
+};
+
+const userResponse: ApiResponse<User> = {
+  success: true,
+  data: {
+    id: 1,
+    name: "Rayhan",
+    email: "rayhan@mail.com",
+  },
+  message: "User fetched successfully",
+};
+
+console.log(productResponse.data);
+console.log(userResponse.data);
+
+/*
+========================================
+Level 30 – Generic CRUD
+========================================
+
+Questions:
+
+1. একটি generic Repository<T> type/class তৈরি করো।
+
+2. এর মধ্যে নিচের methodগুলো থাকবে:
+
+   add(item: T)
+   getAll(): T[]
+   getById(id: number): T | undefined
+   remove(id: number): void
+
+3. User type ব্যবহার করে
+   একটি Repository তৈরি করো।
+
+4. কমপক্ষে ৩টি user add করো।
+
+5. সব user দেখাও।
+
+6. নির্দিষ্ট ID-এর user খুঁজে বের করো।
+
+7. একটি user delete করো।
+
+8. আবার সব user দেখাও।
+
+Answers:
+*/
+
+class Repository<T extends { id: number }> {
+  private items: T[] = [];
+
+  add(item: T): void {
+    this.items.push(item);
+  }
+
+  getAll(): T[] {
+    return this.items;
+  }
+
+  getById(id: number): T | undefined {
+    return this.items.find(
+      (item) => item.id === id
+    );
+  }
+
+  remove(id: number): void {
+    const index = this.items.findIndex(
+      (item) => item.id === id
+    );
+
+    if (index !== -1) {
+      this.items.splice(index, 1);
+    }
+  }
+}
+
+const userRepository = new Repository<User>();
+
+userRepository.add({
+  id: 1,
+  name: "Rayhan",
+  email: "rayhan@mail.com",
+});
+
+userRepository.add({
+  id: 2,
+  name: "Rahim",
+  email: "rahim@mail.com",
+});
+
+userRepository.add({
+  id: 3,
+  name: "Karim",
+  email: "karim@mail.com",
+});
+
+console.log("All Users:");
+console.log(userRepository.getAll());
+
+console.log("User by ID:");
+console.log(userRepository.getById(2));
+
+userRepository.remove(1);
+
+console.log("After Delete:");
+console.log(userRepository.getAll());
+
+/*
+========================================
+Level 31 – Mini Shopping Cart
+========================================
+
+Questions:
+
+1. CartItem নামে একটি type তৈরি করো।
+
+2. এতে থাকবে:
+
+   id: number
+   name: string
+   price: number
+   quantity: number
+
+3. একটি CartItem[] array তৈরি করো।
+
+4. নিচের functionগুলো লিখো:
+
+   addToCart()
+   removeFromCart()
+   updateQuantity()
+   getCartTotal()
+   getCartItems()
+   clearCart()
+
+5. addToCart() product cart-এ যোগ করবে।
+
+6. একই product আবার add করলে
+   নতুন item তৈরি না করে
+   quantity বাড়াবে।
+
+7. removeFromCart() ID দিয়ে
+   product remove করবে।
+
+8. updateQuantity() দিয়ে
+   product-এর quantity পরিবর্তন করবে।
+
+9. getCartTotal() দিয়ে
+   সব product-এর:
+
+   price × quantity
+
+   হিসাব করে total বের করবে।
+
+10. getCartItems() দিয়ে
+    সব cart item return করবে।
+
+11. clearCart() দিয়ে
+    পুরো cart empty করবে।
+
+Test:
+
+Laptop → 80000 → quantity 1
+Mouse → 1500 → quantity 2
+Keyboard → 3000 → quantity 1
+
+তারপর:
+
+1. Laptop-এর quantity 2 করো।
+2. Mouse remove করো।
+3. Final cart দেখাও।
+4. Final cart total বের করো।
+
+Answers:
+*/
+
+type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+};
+
+const cart: CartItem[] = [];
+
+function addToCart(
+  id: number,
+  name: string,
+  price: number,
+  quantity: number
+): void {
+  const existingItem = cart.find(
+    (item) => item.id === id
+  );
+
+  if (existingItem) {
+    existingItem.quantity += quantity;
+  } else {
+    cart.push({
+      id,
+      name,
+      price,
+      quantity,
+    });
+  }
+}
+
+function removeFromCart(id: number): void {
+  const index = cart.findIndex(
+    (item) => item.id === id
+  );
+
+  if (index !== -1) {
+    cart.splice(index, 1);
+  }
+}
+
+function updateQuantity(
+  id: number,
+  quantity: number
+): void {
+  const item = cart.find(
+    (item) => item.id === id
+  );
+
+  if (item) {
+    item.quantity = quantity;
+  }
+}
+
+function getCartTotal(): number {
+  return cart.reduce(
+    (total, item) =>
+      total + item.price * item.quantity,
+    0
+  );
+}
+
+function getCartItems(): CartItem[] {
+  return cart;
+}
+
+function clearCart(): void {
+  cart.length = 0;
+}
+
+// Demo
+
+addToCart(
+  1,
+  "Laptop",
+  80000,
+  1
+);
+
+addToCart(
+  2,
+  "Mouse",
+  1500,
+  2
+);
+
+addToCart(
+  3,
+  "Keyboard",
+  3000,
+  1
+);
+
+// Laptop quantity 2
+updateQuantity(1, 2);
+
+// Mouse remove
+removeFromCart(2);
+
+console.log("Cart Items:");
+console.log(getCartItems());
+
+console.log("Cart Total:");
+console.log(getCartTotal());
+
+// clearCart();
+// console.log(getCartItems());
