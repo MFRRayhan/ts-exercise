@@ -1660,3 +1660,599 @@ console.log(getCartTotal());
 
 // clearCart();
 // console.log(getCartItems());
+
+
+# /*
+
+# Level 32 – Readonly Array
+
+Questions:
+
+1. একটি readonly number[] array তৈরি করো।
+
+2. এতে ৫টি number রাখো।
+
+3. array-এর প্রথম element console-এ দেখাও।
+
+4. array-তে নতুন element যোগ করার চেষ্টা করো।
+
+5. element পরিবর্তন করার চেষ্টা করো।
+
+Answers:
+*/
+
+const readonlyScores: readonly number[] = [
+80,
+85,
+90,
+95,
+100,
+];
+
+console.log(readonlyScores[0]);
+
+// readonlyScores.push(110);
+// ❌ Error
+
+// readonlyScores[0] = 70;
+// ❌ Error
+
+# /*
+
+# Level 33 – Null & Undefined
+
+Questions:
+
+1. username নামে একটি variable তৈরি করো।
+
+2. এর type হবে:
+
+   string | null
+
+3. username-এর value null রাখো।
+
+4. একটি function তৈরি করো:
+
+   printUsername()
+
+5. username null হলে
+   "No username" দেখাবে।
+
+6. username থাকলে
+   username console-এ দেখাবে।
+
+Answers:
+*/
+
+let username: string | null = null;
+
+function printUsername(
+username: string | null
+): void {
+if (username === null) {
+console.log("No username");
+} else {
+console.log(username);
+}
+}
+
+printUsername(username);
+
+username = "Rayhan";
+
+printUsername(username);
+
+# /*
+
+# Level 34 – Type Guard Function
+
+Questions:
+
+1. isString() নামে একটি function তৈরি করো।
+
+2. parameter হবে:
+
+   unknown
+
+3. function-এর return type হবে:
+
+   value is string
+
+4. value string হলে true return করবে।
+
+5. অন্য type হলে false return করবে।
+
+6. function ব্যবহার করে একটি value
+   string কিনা check করো।
+
+Answers:
+*/
+
+function isString(
+value: unknown
+): value is string {
+return typeof value === "string";
+}
+
+const value: unknown = "TypeScript";
+
+if (isString(value)) {
+console.log(value.toUpperCase());
+}
+
+# /*
+
+# Level 35 – Function Overloading
+
+Questions:
+
+1. formatValue() নামে একটি function তৈরি করো।
+
+2. এটি string অথবা number গ্রহণ করবে।
+
+3. string দিলে:
+
+   "Value: <string>"
+
+4. number দিলে:
+
+   "Number: <number>"
+
+5. Function overload ব্যবহার করো।
+
+6. দুই ধরনের value দিয়ে function call করো।
+
+Answers:
+*/
+
+function formatValue(
+value: string
+): string;
+
+function formatValue(
+value: number
+): string;
+
+function formatValue(
+value: string | number
+): string {
+if (typeof value === "string") {
+return `Value: ${value}`;
+}
+
+return `Number: ${value}`;
+}
+
+console.log(formatValue("Hello"));
+console.log(formatValue(100));
+
+# /*
+
+# Level 36 – Readonly Object
+
+Questions:
+
+1. ProductInfo নামে একটি type তৈরি করো।
+
+2. এতে থাকবে:
+
+   readonly id: number
+   name: string
+   price: number
+
+3. একটি product object তৈরি করো।
+
+4. name পরিবর্তন করো।
+
+5. id পরিবর্তন করার চেষ্টা করো।
+
+Answers:
+*/
+
+type ProductInfo = {
+readonly id: number;
+name: string;
+price: number;
+};
+
+const productInfo: ProductInfo = {
+id: 1,
+name: "Laptop",
+price: 80000,
+};
+
+productInfo.name = "Gaming Laptop";
+
+// productInfo.id = 2;
+// ❌ Error
+
+console.log(productInfo);
+
+# /*
+
+# Level 37 – Map & Typed Array
+
+Questions:
+
+1. ProductItem নামে একটি type তৈরি করো।
+
+2. এতে থাকবে:
+
+   id: number
+   name: string
+   price: number
+
+3. কমপক্ষে ৩টি product তৈরি করো।
+
+4. map() ব্যবহার করে
+   শুধু product-এর name-এর একটি string[]
+   তৈরি করো।
+
+5. names console-এ দেখাও।
+
+Answers:
+*/
+
+type ProductItem = {
+id: number;
+name: string;
+price: number;
+};
+
+const productItems: ProductItem[] = [
+{
+id: 1,
+name: "Laptop",
+price: 80000,
+},
+{
+id: 2,
+name: "Mouse",
+price: 1500,
+},
+{
+id: 3,
+name: "Keyboard",
+price: 3000,
+},
+];
+
+const productNames: string[] =
+productItems.map(
+(product) => product.name
+);
+
+console.log(productNames);
+
+# /*
+
+# Level 38 – Utility Type Record with Objects
+
+Questions:
+
+1. Role নামে একটি union type তৈরি করো:
+
+   "admin"
+   "user"
+   "moderator"
+
+2. UserRoleInfo নামে একটি type তৈরি করো
+   Record ব্যবহার করে।
+
+3. প্রতিটি role-এর জন্য থাকবে:
+
+   count: number
+   description: string
+
+4. একটি object তৈরি করো।
+
+5. admin-এর count console-এ দেখাও।
+
+Answers:
+*/
+
+type UserRole =
+| "admin"
+| "user"
+| "moderator";
+
+type UserRoleInfo = Record<
+UserRole,
+{
+count: number;
+description: string;
+}
+
+> ;
+
+const roleInfo: UserRoleInfo = {
+admin: {
+count: 5,
+description: "System administrators",
+},
+
+user: {
+count: 100,
+description: "Normal users",
+},
+
+moderator: {
+count: 10,
+description: "Content moderators",
+},
+};
+
+console.log(roleInfo.admin.count);
+
+# /*
+
+# Level 39 – Generic Search Function
+
+Questions:
+
+1. একটি generic findById() function তৈরি করো।
+
+2. Function-টি এমন object-এর array
+   গ্রহণ করবে যার মধ্যে id থাকবে।
+
+3. Function-এর parameter হবে:
+
+   list
+   id
+
+4. নির্দিষ্ট id-এর object return করবে।
+
+5. না পেলে undefined return করবে।
+
+6. User type ব্যবহার করে test করো।
+
+Answers:
+*/
+
+function findById<
+T extends { id: number }
+
+> (
+> list: T[],
+> id: number
+> ): T | undefined {
+> return list.find(
+> (item) => item.id === id
+> );
+> }
+
+const userList: User[] = [
+{
+id: 1,
+name: "Rayhan",
+email: "[rayhan@mail.com](mailto:rayhan@mail.com)",
+},
+
+{
+id: 2,
+name: "Rahim",
+email: "[rahim@mail.com](mailto:rahim@mail.com)",
+},
+
+{
+id: 3,
+name: "Karim",
+email: "[karim@mail.com](mailto:karim@mail.com)",
+},
+];
+
+console.log(
+findById(userList, 2)
+);
+
+# /*
+
+# Level 40 – Update Object with Partial
+
+Questions:
+
+1. UserProfile নামে একটি type তৈরি করো।
+
+2. এতে থাকবে:
+
+   id: number
+   name: string
+   email: string
+   age: number
+
+3. updateUser() নামে একটি function তৈরি করো।
+
+4. Function-এর parameter হবে:
+
+   user: UserProfile
+   updates: Partial<UserProfile>
+
+5. Function user-এর information update করবে।
+
+6. একটি user তৈরি করো।
+
+7. শুধু name এবং age update করো।
+
+Answers:
+*/
+
+type UserProfile = {
+id: number;
+name: string;
+email: string;
+age: number;
+};
+
+function updateUser(
+user: UserProfile,
+updates: Partial<UserProfile>
+): UserProfile {
+return {
+...user,
+...updates,
+};
+}
+
+const currentUser: UserProfile = {
+id: 1,
+name: "Rayhan",
+email: "[rayhan@mail.com](mailto:rayhan@mail.com)",
+age: 24,
+};
+
+const updatedUser = updateUser(
+currentUser,
+{
+name: "Md. Rayhan",
+age: 25,
+}
+);
+
+console.log(updatedUser);
+
+# /*
+
+# Level 41 – Generic Data Manager
+
+Questions:
+
+1. একটি generic DataManager<T> class তৈরি করো।
+
+2. T-এর মধ্যে অবশ্যই থাকবে:
+
+   id: number
+
+3. Class-এর মধ্যে থাকবে:
+
+   add()
+   getAll()
+   getById()
+   update()
+   remove()
+
+4. update() method ব্যবহার করে
+   Partial<T> দিয়ে data update করো।
+
+5. User type ব্যবহার করে
+   একটি DataManager তৈরি করো।
+
+6. কমপক্ষে ৩টি user add করো।
+
+7. একটি user-এর name update করো।
+
+8. একটি user-এর email update করো।
+
+9. একটি user remove করো।
+
+10. সব user console-এ দেখাও।
+
+Answers:
+*/
+
+class DataManager<
+T extends { id: number }
+
+> {
+> private items: T[] = [];
+
+add(item: T): void {
+this.items.push(item);
+}
+
+getAll(): T[] {
+return this.items;
+}
+
+getById(
+id: number
+): T | undefined {
+return this.items.find(
+(item) => item.id === id
+);
+}
+
+update(
+id: number,
+updates: Partial<T>
+): void {
+const item = this.getById(id);
+
+```
+if (item) {
+  Object.assign(item, updates);
+}
+```
+
+}
+
+remove(id: number): void {
+const index = this.items.findIndex(
+(item) => item.id === id
+);
+
+```
+if (index !== -1) {
+  this.items.splice(index, 1);
+}
+```
+
+}
+}
+
+// Demo
+
+const userManager =
+new DataManager<User>();
+
+userManager.add({
+id: 1,
+name: "Rayhan",
+email: "[rayhan@mail.com](mailto:rayhan@mail.com)",
+});
+
+userManager.add({
+id: 2,
+name: "Rahim",
+email: "[rahim@mail.com](mailto:rahim@mail.com)",
+});
+
+userManager.add({
+id: 3,
+name: "Karim",
+email: "[karim@mail.com](mailto:karim@mail.com)",
+});
+
+// Update user
+
+userManager.update(1, {
+name: "Md. Rayhan",
+});
+
+userManager.update(2, {
+email: "[rahim@gmail.com](mailto:rahim@gmail.com)",
+});
+
+// Remove user
+
+userManager.remove(3);
+
+// Show all users
+
+console.log(
+"All Users:"
+);
+
+console.log(
+userManager.getAll()
+);
+
+// Find user
+
+console.log(
+"User by ID:"
+);
+
+console.log(
+userManager.getById(1)
+);
+
