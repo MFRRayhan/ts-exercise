@@ -2256,3 +2256,670 @@ console.log(
 userManager.getById(1)
 );
 
+/*
+========================================
+# Level 42 – Generic Filter Manager
+========================================
+
+Questions:
+
+1. একটি generic FilterManager<T> class তৈরি করো।
+
+2. Class-এর মধ্যে থাকবে:
+
+   add()
+   getAll()
+   filter()
+   remove()
+
+3. filter() method ব্যবহার করে
+   নির্দিষ্ট condition অনুযায়ী
+   data filter করো।
+
+4. User type ব্যবহার করে
+   একটি FilterManager তৈরি করো।
+
+5. কমপক্ষে ৫টি user add করো।
+
+6. যাদের name "R" দিয়ে শুরু
+   তাদের খুঁজে বের করো।
+
+7. যাদের age 25-এর বেশি
+   তাদের খুঁজে বের করো।
+
+8. একটি user remove করো।
+
+9. সব user console-এ দেখাও।
+
+Answers:
+*/
+
+class FilterManager<T> {
+  private items: T[] = [];
+
+  add(item: T): void {
+    this.items.push(item);
+  }
+
+  getAll(): T[] {
+    return this.items;
+  }
+
+  filter(
+    callback: (item: T) => boolean
+  ): T[] {
+    return this.items.filter(callback);
+  }
+
+  remove(
+    callback: (item: T) => boolean
+  ): void {
+    this.items = this.items.filter(
+      (item) => !callback(item)
+    );
+  }
+}
+
+// Demo
+
+const userFilterManager =
+  new FilterManager<User>();
+
+userFilterManager.add({
+  id: 1,
+  name: "Rayhan",
+  email: "rayhan@mail.com",
+});
+
+userFilterManager.add({
+  id: 2,
+  name: "Rahim",
+  email: "rahim@mail.com",
+});
+
+userFilterManager.add({
+  id: 3,
+  name: "Karim",
+  email: "karim@mail.com",
+});
+
+userFilterManager.add({
+  id: 4,
+  name: "Rafi",
+  email: "rafi@mail.com",
+});
+
+userFilterManager.add({
+  id: 5,
+  name: "Sakib",
+  email: "sakib@mail.com",
+});
+
+console.log("All Users:");
+console.log(
+  userFilterManager.getAll()
+);
+
+console.log("Users starting with R:");
+
+console.log(
+  userFilterManager.filter(
+    (user) =>
+      user.name.startsWith("R")
+  )
+);
+
+userFilterManager.remove(
+  (user) => user.id === 3
+);
+
+console.log("After Remove:");
+
+console.log(
+  userFilterManager.getAll()
+);
+
+
+/*
+========================================
+# Level 43 – Generic Sort Manager
+========================================
+
+Questions:
+
+1. একটি generic SortManager<T> class তৈরি করো।
+
+2. Class-এর মধ্যে থাকবে:
+
+   add()
+   getAll()
+   sortBy()
+
+3. sortBy() method ব্যবহার করে
+   কোনো property অনুযায়ী data sort করো।
+
+4. Product type তৈরি করো:
+
+   id: number
+   name: string
+   price: number
+
+5. কমপক্ষে ৫টি product add করো।
+
+6. price অনুযায়ী
+   ascending order-এ sort করো।
+
+7. আবার price অনুযায়ী
+   descending order-এ sort করো।
+
+8. name অনুযায়ী
+   alphabetical order-এ sort করো।
+
+Answers:
+*/
+
+type SortProduct = {
+  id: number;
+  name: string;
+  price: number;
+};
+
+class SortManager<T> {
+  private items: T[] = [];
+
+  add(item: T): void {
+    this.items.push(item);
+  }
+
+  getAll(): T[] {
+    return this.items;
+  }
+
+  sortBy(
+    callback: (a: T, b: T) => number
+  ): T[] {
+    return [...this.items].sort(callback);
+  }
+}
+
+// Demo
+
+const productManager =
+  new SortManager<SortProduct>();
+
+productManager.add({
+  id: 1,
+  name: "Laptop",
+  price: 80000,
+});
+
+productManager.add({
+  id: 2,
+  name: "Mouse",
+  price: 1500,
+});
+
+productManager.add({
+  id: 3,
+  name: "Keyboard",
+  price: 3000,
+});
+
+productManager.add({
+  id: 4,
+  name: "Monitor",
+  price: 25000,
+});
+
+productManager.add({
+  id: 5,
+  name: "Phone",
+  price: 30000,
+});
+
+console.log("All Products:");
+
+console.log(
+  productManager.getAll()
+);
+
+console.log("Price Ascending:");
+
+console.log(
+  productManager.sortBy(
+    (a, b) => a.price - b.price
+  )
+);
+
+console.log("Price Descending:");
+
+console.log(
+  productManager.sortBy(
+    (a, b) => b.price - a.price
+  )
+);
+
+console.log("Name Alphabetically:");
+
+console.log(
+  productManager.sortBy(
+    (a, b) =>
+      a.name.localeCompare(b.name)
+  )
+);
+
+
+/*
+========================================
+# Level 44 – Generic Pagination
+========================================
+
+Questions:
+
+1. একটি generic Pagination<T> class তৈরি করো।
+
+2. Class-এর মধ্যে থাকবে:
+
+   setItems()
+   getPage()
+   getTotalPages()
+   getTotalItems()
+
+3. Constructor-এ pageSize গ্রহণ করো।
+
+4. User type ব্যবহার করো।
+
+5. কমপক্ষে ১০টি user তৈরি করো।
+
+6. pageSize 3 রাখো।
+
+7. Page 1-এর users দেখাও।
+
+8. Page 2-এর users দেখাও।
+
+9. Total pages বের করো।
+
+10. Total users বের করো।
+
+Answers:
+*/
+
+class Pagination<T> {
+  private items: T[] = [];
+
+  constructor(
+    private pageSize: number
+  ) {}
+
+  setItems(items: T[]): void {
+    this.items = items;
+  }
+
+  getPage(page: number): T[] {
+    const start =
+      (page - 1) * this.pageSize;
+
+    const end =
+      start + this.pageSize;
+
+    return this.items.slice(
+      start,
+      end
+    );
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(
+      this.items.length /
+        this.pageSize
+    );
+  }
+
+  getTotalItems(): number {
+    return this.items.length;
+  }
+}
+
+// Demo
+
+const pagination =
+  new Pagination<User>(3);
+
+const paginationUsers: User[] = [
+  {
+    id: 1,
+    name: "Rayhan",
+    email: "rayhan@mail.com",
+  },
+  {
+    id: 2,
+    name: "Rahim",
+    email: "rahim@mail.com",
+  },
+  {
+    id: 3,
+    name: "Karim",
+    email: "karim@mail.com",
+  },
+  {
+    id: 4,
+    name: "Rafi",
+    email: "rafi@mail.com",
+  },
+  {
+    id: 5,
+    name: "Sakib",
+    email: "sakib@mail.com",
+  },
+  {
+    id: 6,
+    name: "Hasan",
+    email: "hasan@mail.com",
+  },
+  {
+    id: 7,
+    name: "Nabil",
+    email: "nabil@mail.com",
+  },
+  {
+    id: 8,
+    name: "Fahim",
+    email: "fahim@mail.com",
+  },
+  {
+    id: 9,
+    name: "Jahid",
+    email: "jahid@mail.com",
+  },
+  {
+    id: 10,
+    name: "Siam",
+    email: "siam@mail.com",
+  },
+];
+
+pagination.setItems(
+  paginationUsers
+);
+
+console.log("Page 1:");
+
+console.log(
+  pagination.getPage(1)
+);
+
+console.log("Page 2:");
+
+console.log(
+  pagination.getPage(2)
+);
+
+console.log("Total Pages:");
+
+console.log(
+  pagination.getTotalPages()
+);
+
+console.log("Total Items:");
+
+console.log(
+  pagination.getTotalItems()
+);
+
+
+/*
+========================================
+# Level 45 – Generic Cache Manager
+========================================
+
+Questions:
+
+1. একটি generic CacheManager<T> class তৈরি করো।
+
+2. Class-এর মধ্যে থাকবে:
+
+   set()
+   get()
+   has()
+   remove()
+   clear()
+
+3. set() method দিয়ে
+   key এবং value save করো।
+
+4. get() method দিয়ে
+   key অনুযায়ী value return করো।
+
+5. has() method দিয়ে
+   key exist করে কিনা check করো।
+
+6. remove() method দিয়ে
+   নির্দিষ্ট key remove করো।
+
+7. clear() method দিয়ে
+   পুরো cache empty করো।
+
+8. User type ব্যবহার করে
+   CacheManager তৈরি করো।
+
+Answers:
+*/
+
+class CacheManager<T> {
+  private cache = new Map<
+    number,
+    T
+  >();
+
+  set(
+    key: number,
+    value: T
+  ): void {
+    this.cache.set(key, value);
+  }
+
+  get(
+    key: number
+  ): T | undefined {
+    return this.cache.get(key);
+  }
+
+  has(key: number): boolean {
+    return this.cache.has(key);
+  }
+
+  remove(key: number): void {
+    this.cache.delete(key);
+  }
+
+  clear(): void {
+    this.cache.clear();
+  }
+}
+
+// Demo
+
+const userCache =
+  new CacheManager<User>();
+
+userCache.set(1, {
+  id: 1,
+  name: "Rayhan",
+  email: "rayhan@mail.com",
+});
+
+userCache.set(2, {
+  id: 2,
+  name: "Rahim",
+  email: "rahim@mail.com",
+});
+
+userCache.set(3, {
+  id: 3,
+  name: "Karim",
+  email: "karim@mail.com",
+});
+
+console.log("User 1:");
+
+console.log(
+  userCache.get(1)
+);
+
+console.log("Has User 2:");
+
+console.log(
+  userCache.has(2)
+);
+
+userCache.remove(2);
+
+console.log("After Remove:");
+
+console.log(
+  userCache.has(2)
+);
+
+console.log("User 3:");
+
+console.log(
+  userCache.get(3)
+);
+
+userCache.clear();
+
+console.log("After Clear:");
+
+console.log(
+  userCache.get(1)
+);
+
+
+/*
+========================================
+# Level 46 – Generic Event Manager
+========================================
+
+Questions:
+
+1. একটি generic EventManager<T> class তৈরি করো।
+
+2. Class-এর মধ্যে থাকবে:
+
+   on()
+   emit()
+   off()
+
+3. on() method দিয়ে
+   একটি event-এর জন্য
+   callback register করো।
+
+4. emit() method দিয়ে
+   event-এর data পাঠাও।
+
+5. off() method দিয়ে
+   event-এর callback remove করো।
+
+6. EventManager<string> তৈরি করো।
+
+7. "message" নামে একটি event তৈরি করো।
+
+8. message event-এ একটি callback
+   register করো।
+
+9. emit() ব্যবহার করে
+   message পাঠাও।
+
+10. Callback remove করার পর
+    আবার emit() করো।
+
+Answers:
+*/
+
+class EventManager<T> {
+  private events = new Map<
+    string,
+    ((data: T) => void)[]
+  >();
+
+  on(
+    eventName: string,
+    callback: (data: T) => void
+  ): void {
+    const callbacks =
+      this.events.get(eventName) ?? [];
+
+    callbacks.push(callback);
+
+    this.events.set(
+      eventName,
+      callbacks
+    );
+  }
+
+  emit(
+    eventName: string,
+    data: T
+  ): void {
+    const callbacks =
+      this.events.get(eventName) ?? [];
+
+    callbacks.forEach(
+      (callback) => callback(data)
+    );
+  }
+
+  off(
+    eventName: string,
+    callback: (data: T) => void
+  ): void {
+    const callbacks =
+      this.events.get(eventName) ?? [];
+
+    this.events.set(
+      eventName,
+      callbacks.filter(
+        (item) => item !== callback
+      )
+    );
+  }
+}
+
+// Demo
+
+const eventManager =
+  new EventManager<string>();
+
+const messageHandler = (
+  message: string
+): void => {
+  console.log(
+    "Message:",
+    message
+  );
+};
+
+eventManager.on(
+  "message",
+  messageHandler
+);
+
+eventManager.emit(
+  "message",
+  "Hello TypeScript!"
+);
+
+eventManager.emit(
+  "message",
+  "Learning Generics"
+);
+
+eventManager.off(
+  "message",
+  messageHandler
+);
+
+eventManager.emit(
+  "message",
+  "This will not be shown"
+);
